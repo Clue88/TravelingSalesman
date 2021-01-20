@@ -31,13 +31,25 @@ public class TravelingSalesman {
         int shortest = Integer.MAX_VALUE;
         int sequence = 0;
 
-        for (int i = 0; i < 2000000; i++) {
+        while (true) {
             sequence = 0;
-            Collections.shuffle(digits);
-            for (int j = 0; j < digits.size() - 1; j++) {
-                sequence += grid[digits.get(j)][digits.get(j+1)];
+            for (int j = 1; j < digits.size(); j++) {
+                if (digits.subList(0, j).contains(digits.get(j))) {
+                  sequence = Integer.MAX_VALUE;
+                  break;
+                }
+                sequence += grid[digits.get(j - 1)][digits.get(j)];
             }
             if (sequence < shortest) shortest = sequence;
+            int i;
+            for (i = 1; i <= digits.size() && digits.get(digits.size() - i) >= digits.size() - 1; i++) {
+              digits.set((digits.size() - i) , 0);
+            }
+            if(i <= digits.size()) {
+              digits.set((digits.size() - i) , digits.get(digits.size() - i) + 1);
+            } else {
+              break;
+            }
         }
 
         System.out.println(shortest);
