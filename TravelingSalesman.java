@@ -31,7 +31,7 @@ public class TravelingSalesman {
         int shortest = Integer.MAX_VALUE;
         int sequence = 0;
 
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 2000000; i++) {
             sequence = 0;
             Collections.shuffle(digits);
             for (int j = 0; j < digits.size() - 1; j++) {
